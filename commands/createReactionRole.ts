@@ -1,5 +1,5 @@
 import {Command} from "./Command";
-import {Client, CommandInteraction, EmbedBuilder} from "discord.js";
+import {ApplicationCommandOptionType, Client, CommandInteraction, EmbedBuilder} from "discord.js";
 
 export const CreateReactionRole: Command = {
   name: "create",
@@ -9,23 +9,24 @@ export const CreateReactionRole: Command = {
     {
       name: "title",
       description: "Nazev",
-      type: 3,
+      type: ApplicationCommandOptionType.String,
       required: true
     },
     {
       name: "description",
       description: "Popis",
-      type: 3,
+      type: ApplicationCommandOptionType.String,
       required: false
     }
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
     const embed = new EmbedBuilder()
-      .setTitle(<string>interaction.options.get("title")?.value)
+      .setTitle(interaction.options.get("title")?.value as string)
       .setColor(0x39BEFD);
-    if (interaction.options.get("description")?.value !== undefined)
-      embed.setDescription(<string>interaction.options.get("description")?.value);
-    interaction.channel?.send({embeds: [embed]});
-    await interaction.reply({content: "Created!", ephemeral: true})
+    const desc = interaction.options.get("description")?.value as string;
+    if (desc)
+      embed.setDescription(desc);
+    await interaction.channel?.send({embeds: [embed]});
+    await interaction.reply({content: "Zpráva byla úspěšně vytvořena!", ephemeral: true})
   }
 }
