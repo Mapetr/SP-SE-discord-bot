@@ -1,10 +1,11 @@
-import {Client, GatewayIntentBits} from "discord.js";
+import {Client} from "discord.js";
 import * as Sentry from "@sentry/node";
 import "@sentry/tracing"
 import * as path from "path";
 import * as fs from "fs";
 import {fileURLToPath} from "url";
 import "dotenv/config";
+import {GatewayIntentBits} from "discord-api-types/v10";
 
 // Setup for Sentry
 Sentry.init({

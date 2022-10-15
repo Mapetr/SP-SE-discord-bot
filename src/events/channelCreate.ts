@@ -1,5 +1,6 @@
 import {EmbedBuilder, GuildChannel, TextChannel} from "discord.js";
 import data from "../../config.json" assert {type: "json"};
+import {convertChannelType} from "../lib/types.js";
 
 export default {
   name: 'channelCreate',
@@ -8,8 +9,9 @@ export default {
     const embed = new EmbedBuilder()
       .setColor(0x00ff00)
       .setTitle("Kanál vytvořen")
-      .addFields({ name: 'Název', value: channel.name })
-      .setFooter({ text: `ID: ${channel.id}` })
+      .addFields({name: 'Název', value: channel.name})
+      .addFields({name: 'Typ', value: convertChannelType(channel.type)})
+      .setFooter({text: `Channel ID: ${channel.id}`})
       .setTimestamp();
     const sendChannel = channel.guild.channels.cache.get(data.channel) as TextChannel;
     if (sendChannel) await sendChannel.send({embeds: [embed]});
