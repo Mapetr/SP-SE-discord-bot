@@ -1,4 +1,4 @@
-import {Command} from "./Command";
+import {Command} from "./Command.js";
 import {Client, CommandInteraction} from "discord.js";
 import fsPromises from "fs/promises";
 

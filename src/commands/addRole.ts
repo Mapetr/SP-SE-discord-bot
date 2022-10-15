@@ -1,5 +1,15 @@
-import {Command} from "./Command";
-import {APIActionRowComponent, APIButtonComponent, APIButtonComponentWithCustomId, ApplicationCommandOptionType, ButtonBuilder, ButtonStyle, Client, CommandInteraction, ComponentType} from "discord.js";
+import {Command} from "./Command.js";
+import {
+  APIActionRowComponent,
+  APIButtonComponent,
+  APIButtonComponentWithCustomId,
+  ApplicationCommandOptionType,
+  ButtonBuilder,
+  ButtonStyle,
+  Client,
+  CommandInteraction,
+  ComponentType
+} from "discord.js";
 
 export const AddRole: Command = {
   name: "addrole",
@@ -30,7 +40,7 @@ export const AddRole: Command = {
     const roleId = interaction.options.get("role")?.value as string;
     const emoji = interaction.options.get("emoji")?.value as string;
 
-    const message = 
+    const message =
       interaction.channel?.messages.cache.get(messageId)
       || await interaction.channel?.messages.fetch(messageId);
     if (message) {
@@ -39,7 +49,7 @@ export const AddRole: Command = {
         return;
       }
 
-      const role = 
+      const role =
         interaction.guild?.roles.cache.get(roleId)
         || await interaction.guild?.roles.fetch(roleId);
       if (role) {

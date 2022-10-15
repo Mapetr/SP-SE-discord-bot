@@ -1,4 +1,4 @@
-import {Command} from "./Command";
+import {Command} from "./Command.js";
 import {ApplicationCommandOptionType, Client, CommandInteraction, EmbedBuilder} from "discord.js";
 
 export const CreateReactionRole: Command = {

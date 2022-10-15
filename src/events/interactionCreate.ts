@@ -5,7 +5,7 @@ import {
   CommandInteraction,
   GuildMemberRoleManager
 } from "discord.js";
-import {Commands} from "../Commands";
+import {Commands} from "../Commands.js";
 
 export default {
   name: 'interactionCreate',

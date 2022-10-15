@@ -1,5 +1,5 @@
 import {Client, CommandInteraction, EmbedBuilder} from "discord.js";
-import {Command} from "./Command";
+import {Command} from "./Command.js";
 import json from "../../package.json" assert {type: "json"};
 
 export const Stats: Command = {
