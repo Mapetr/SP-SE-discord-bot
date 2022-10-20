@@ -9,10 +9,11 @@ export default {
       .setColor(0x00ff00)
       .setTitle("Vytvořeno emoji")
       .addFields(
-        { name: 'Název', value: emoji.name ?? "N/A" },
-        { name: 'Autor', value: emoji.author?.username ?? "N/A", inline: true },
-        { name: 'Animovaný', value: emoji.animated ? "Ano" : "Ne", inline: true },
-        )
+        {name: 'Název', value: emoji.name ?? "N/A"},
+        {name: 'Autor', value: emoji.author?.username ?? "N/A", inline: true},
+        {name: 'Animovaný', value: emoji.animated ? "Ano" : "Ne", inline: true},
+      )
+      .setURL(emoji.url)
       .setImage(emoji.url)
       .setFooter({ text: `ID: ${emoji.id}` })
       .setTimestamp();

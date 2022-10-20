@@ -11,6 +11,7 @@ export default {
       .setTitle("Kanál odstraněn")
       .addFields({name: 'Název', value: channel.name})
       .addFields({name: 'Typ', value: convertChannelType(channel.type)})
+      .setURL(channel.url)
       .setFooter({ text: `ID: ${channel.id}` })
       .setTimestamp();
     const sendChannel = channel.guild.channels.cache.get(data.channel) as TextChannel;
