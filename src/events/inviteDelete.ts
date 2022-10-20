@@ -11,8 +11,6 @@ export default {
       .setFields(
         { name: 'Kod', value: invite.code },
         { name: 'Vytvořil', value: invite.inviter?.tag ?? 'N/A' },
-        { name: 'Maximální počet použití', value: invite.maxUses?.toString() ?? 'N/A' },
-        { name: 'Vyprší', value: invite.expiresAt?.toString() ?? 'N/A' },
       )
       .setFooter({ text: `ID: ${invite.inviterId}` })
       .setTimestamp();
