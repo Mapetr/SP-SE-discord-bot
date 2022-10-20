@@ -16,6 +16,10 @@ export default {
     if (oldEvent.name !== newEvent.name) {
       embed.addFields({name: 'Jméno', value: `${oldEvent.name} -> ${newEvent.name}`});
     }
+    // Description
+    if (oldEvent.description !== newEvent.description) {
+      embed.addFields({name: 'Popis', value: `${oldEvent.description} -> ${newEvent.description}`});
+    }
     // Start
     if (oldEvent.scheduledStartAt !== newEvent.scheduledStartAt) {
       embed.addFields({
