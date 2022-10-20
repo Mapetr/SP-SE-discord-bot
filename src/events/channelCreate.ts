@@ -1,6 +1,6 @@
 import {EmbedBuilder, GuildChannel, TextChannel} from "discord.js";
 import data from "../../config.json" assert {type: "json"};
-import {convertChannelType} from "../lib/types.js";
+import {convertChannelType} from "../lib/conversion.js";
 
 export default {
   name: 'channelCreate',
