@@ -9,12 +9,12 @@ export default {
       .setColor(0xff0000)
       .setTitle("Odstraněn event")
       .setFields(
-        { name: 'Jméno', value: event.name },
-        { name: 'Popis', value: event.description ?? "N/A" },
-        { name: 'Vytvořen na', value: event.scheduledStartAt?.toLocaleString() ?? "N/A" },
-        { name: 'Vytvořil', value: event.creator?.tag ?? "N/A" },
+        {name: 'Jméno', value: event.name},
+        {name: 'Popis', value: event.description ?? "N/A"},
+        {name: 'Vytvořil', value: event.creator?.tag ?? "N/A"},
       )
       .setImage(event.image)
+      .setURL(event.url)
       .setFooter({ text: `ID: ${event.id}` })
       .setTimestamp();
     const sendChannel = event.guild?.channels.cache.get(data.channel) as TextChannel;
