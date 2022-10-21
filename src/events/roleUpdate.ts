@@ -35,5 +35,3 @@ export default {
     else console.error("Events: Channel is non-existent");
   }
 }
-
-// TODO: Check for updated properties
