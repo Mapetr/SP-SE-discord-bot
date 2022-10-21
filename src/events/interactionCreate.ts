@@ -6,6 +6,7 @@ import {
   GuildMemberRoleManager
 } from "discord.js";
 import {Commands} from "../Commands.js";
+import {captureException} from "@sentry/node";
 
 export default {
   name: 'interactionCreate',
@@ -23,7 +24,7 @@ export default {
               await roles.remove(roleId);
               await interaction.reply({content: "Role odstraněna", ephemeral: true});
             } else {
-              await roles.add(roleId).catch(err => console.error(err));
+              await roles.add(roleId).catch(err => captureException(err));
               await interaction.reply({content: "Role přidána", ephemeral: true});
             }
           }
@@ -34,7 +35,7 @@ export default {
       }
       return;
     }
-    await handleSlashCommand(interaction.client, <ChatInputCommandInteraction>interaction).catch(err => console.error(err));
+    await handleSlashCommand(interaction.client, <ChatInputCommandInteraction>interaction).catch(err => captureException(err));
   }
 }
 

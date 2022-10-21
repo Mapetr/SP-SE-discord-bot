@@ -1,5 +1,5 @@
-import {EmbedBuilder, StageInstance, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, StageInstance} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'stageInstanceDelete',
@@ -9,12 +9,10 @@ export default {
       .setColor(0xff0000)
       .setTitle("Odebrán stage kanál")
       .setFields(
-        { name: 'Téma', value: stage.topic }
+        {name: 'Téma', value: stage.topic}
       )
       .setFooter({ text: `ID: ${stage.id}` })
       .setTimestamp();
-    const sendChannel = stage.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, stage.client);
   }
 }

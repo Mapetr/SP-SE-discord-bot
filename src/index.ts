@@ -1,10 +1,11 @@
-import {Client, GatewayIntentBits} from "discord.js";
+import {Client} from "discord.js";
 import * as Sentry from "@sentry/node";
 import "@sentry/tracing"
 import * as path from "path";
 import * as fs from "fs";
 import {fileURLToPath} from "url";
 import "dotenv/config";
+import {GatewayIntentBits} from "discord-api-types/v10";
 
 // Setup for Sentry
 Sentry.init({
@@ -53,7 +54,6 @@ for (const file of eventFiles) {
     }
     if (process.env.NODE_ENV === "dev") console.log(`Loaded event ${event.name}`);
   }).catch((e) => {
-    console.error(e);
     Sentry.captureException(e);
   });
 }
@@ -61,6 +61,5 @@ for (const file of eventFiles) {
 // Login to Discord
 client.login(process.env.TOKEN)
   .catch(err => {
-    console.error(err);
     Sentry.captureException(err);
   });

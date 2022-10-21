@@ -1,5 +1,6 @@
-import {EmbedBuilder, GuildChannel, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, GuildChannel} from "discord.js";
+import {convertChannelType} from "../lib/conversion.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'channelDelete',
@@ -8,11 +9,11 @@ export default {
     const embed = new EmbedBuilder()
       .setColor(0xff0000)
       .setTitle("Kanál odstraněn")
-      .addFields({ name: 'Název', value: channel.name })
+      .addFields({name: 'Název', value: channel.name})
+      .addFields({name: 'Typ', value: convertChannelType(channel.type)})
+      .setURL(channel.url)
       .setFooter({ text: `ID: ${channel.id}` })
       .setTimestamp();
-    const sendChannel = channel.guild.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, channel.client);
   }
 }

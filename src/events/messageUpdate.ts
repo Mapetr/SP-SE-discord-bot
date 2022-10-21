@@ -1,5 +1,5 @@
-import {EmbedBuilder, Message, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, Message} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'messageUpdate',
@@ -8,17 +8,23 @@ export default {
     const embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle("Zpráva upravena")
-      .setFields(
-        { name: 'Stará zpráva', value: oldMessage.content },
-        { name: 'Nová zpráva', value: newMessage.content },
-        { name: 'Autor', value: newMessage.author.tag },
-      )
-      .setFooter({ text: `ID: ${newMessage.author.id}` })
+      .setFooter({text: `ID: ${newMessage.author.id}`})
+      .setURL(newMessage.url)
       .setTimestamp();
-    const sendChannel = oldMessage.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    // Content
+    if (oldMessage.content !== newMessage.content) {
+      embed.addFields({name: 'Zpráva', value: `${oldMessage.content} -> ${newMessage.content}`});
+    }
+    // Embeds
+    if (oldMessage.embeds.length !== newMessage.embeds.length) {
+      embed.addFields({name: 'Embedy', value: `${oldMessage.embeds.length} -> ${newMessage.embeds.length}`});
+    }
+    // Pinned
+    if (oldMessage.pinned !== newMessage.pinned) {
+      embed.addFields({name: 'Pinned', value: `${oldMessage.pinned} -> ${newMessage.pinned}`});
+    }
+    // Author
+    embed.addFields({name: "Autor", value: newMessage.author.tag});
+    await sendLog(embed, newMessage.client);
   }
 }
-
-// TODO: Check for updated properties

@@ -1,5 +1,5 @@
-import {EmbedBuilder, Message, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, Message} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'messageDelete',
@@ -9,13 +9,11 @@ export default {
       .setColor(0xff0000)
       .setTitle("Zpráva odstraněna")
       .setFields(
-        { name: 'Zpráva', value: message.content },
-        { name: 'Autor', value: message.author.tag },
+        {name: 'Zpráva', value: message.content},
+        {name: 'Autor', value: message.author.tag},
       )
       .setFooter({ text: `ID: ${message.author.id}` })
       .setTimestamp();
-    const sendChannel = message.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, message.client);
   }
 }

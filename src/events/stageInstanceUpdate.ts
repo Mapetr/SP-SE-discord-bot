@@ -1,5 +1,5 @@
-import {EmbedBuilder, StageInstance, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, StageInstance} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'stageInstanceUpdate',
@@ -8,15 +8,16 @@ export default {
     const embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle("Odebrán stage kanál")
-      .setFields(
-        { name: 'Téma', value: newStage.topic }
-      )
-      .setFooter({ text: `ID: ${newStage.id}` })
+      .setFooter({text: `ID: ${newStage.id}`})
       .setTimestamp();
-    const sendChannel = newStage.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    // Topic
+    if (oldStage.topic !== newStage.topic) {
+      embed.addFields({ name: 'Téma', value: `${oldStage.topic} -> ${newStage.topic}` });
+    }
+    // Privacy level
+    if (oldStage.privacyLevel !== newStage.privacyLevel) {
+      embed.addFields({ name: 'Level soukromí', value: `${oldStage.privacyLevel} -> ${newStage.privacyLevel}` });
+    }
+    await sendLog(embed, newStage.client);
   }
 }
-
-// TODO: Check for updated properties

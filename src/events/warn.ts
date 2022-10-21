@@ -1,7 +1,9 @@
+import {captureMessage} from "@sentry/node";
+
 export default {
   name: 'warn',
   once: false,
   async execute(warn: string) {
-    console.warn(warn);
+    captureMessage(warn, 'warning');
   }
 }

@@ -1,5 +1,5 @@
-import {EmbedBuilder, GuildBan, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, GuildBan} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'guildBanAdd',
@@ -9,15 +9,13 @@ export default {
       .setColor(0xff0000)
       .setTitle("Uživatel zabanován")
       .setFields(
-        { name: 'Jméno', value: ban.user.tag },
-        { name: 'ID', value: ban.user.id },
-        { name: 'Důvod', value: ban.reason ?? 'N/A' },
+        {name: 'Jméno', value: ban.user.tag},
+        {name: 'ID', value: ban.user.id},
+        {name: 'Důvod', value: ban.reason ?? 'N/A'},
       )
       .setImage(ban.user.avatarURL())
       .setFooter({ text: `ID: ${ban.user.id}` })
       .setTimestamp();
-    const sendChannel = ban.guild.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, ban.client);
   }
 }
