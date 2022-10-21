@@ -1,5 +1,5 @@
-import {EmbedBuilder, Role, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, Role} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'roleUpdate',
@@ -8,7 +8,7 @@ export default {
     const embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle("Role upravena")
-      .setFooter({ text: `ID: ${newRole.id}` })
+      .setFooter({text: `ID: ${newRole.id}`})
       .setTimestamp();
     // Name
     if (oldRole.name !== newRole.name) {
@@ -30,8 +30,6 @@ export default {
     if (oldRole.unicodeEmoji !== newRole.unicodeEmoji) {
       embed.addFields({name: 'Unicode emoji', value: `${oldRole.unicodeEmoji} -> ${newRole.unicodeEmoji}`});
     }
-    const sendChannel = newRole.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newRole.client);
   }
 }

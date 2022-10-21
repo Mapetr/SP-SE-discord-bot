@@ -1,5 +1,5 @@
-import {EmbedBuilder, TextChannel, VoiceState} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, VoiceState} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'voiceStateUpdate',
@@ -11,6 +11,14 @@ export default {
       .setImage(newState.member?.avatarURL() ?? null)
       .setFooter({text: `ID: ${newState.member?.id}`})
       .setTimestamp();
+    // Join
+    if (!oldState.channelId) {
+      embed.setTitle("Uživatel se připojil do hlasového kanálu");
+    }
+    // Leave
+    if (!newState.channelId) {
+      embed.setTitle("Uživatel se odpojil z hlasového kanálu");
+    }
     // Channel
     if (oldState.channelId !== newState.channelId) {
       embed.addFields({name: 'Kanál', value: `${oldState.channel?.name} -> ${newState.channel?.name}`});
@@ -39,8 +47,6 @@ export default {
     if (oldState.streaming !== newState.streaming) {
       embed.addFields({name: 'Streaming', value: `${oldState.streaming} -> ${newState.streaming}`});
     }
-    const sendChannel = newState.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newState.client);
   }
 }

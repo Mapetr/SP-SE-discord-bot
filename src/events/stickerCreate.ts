@@ -1,6 +1,6 @@
-import {EmbedBuilder, Sticker, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, Sticker} from "discord.js";
 import {convertStickerFormat} from "../lib/conversion.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'stickerCreate',
@@ -18,8 +18,6 @@ export default {
       .setImage(sticker.url)
       .setFooter({ text: `ID: ${sticker.id}` })
       .setTimestamp();
-    const sendChannel = sticker.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, sticker.client);
   }
 }

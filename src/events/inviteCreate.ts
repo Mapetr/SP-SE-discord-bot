@@ -1,5 +1,5 @@
-import {EmbedBuilder, Invite, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, Invite} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'inviteCreate',
@@ -18,8 +18,6 @@ export default {
       .setURL(invite.url)
       .setFooter({ text: `ID: ${invite.inviterId}` })
       .setTimestamp();
-    const sendChannel = invite.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, invite.client);
   }
 }

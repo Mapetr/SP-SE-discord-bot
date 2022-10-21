@@ -1,5 +1,5 @@
-import {EmbedBuilder, TextChannel, ThreadChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, ThreadChannel} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'threadUpdate',
@@ -27,8 +27,6 @@ export default {
     if (oldThread.type !== newThread.type) {
       embed.addFields({name: "Typ", value: `${oldThread.type} -> ${newThread.type}`});
     }
-    const sendChannel = newThread.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newThread.client);
   }
 }

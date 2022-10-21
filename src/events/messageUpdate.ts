@@ -1,5 +1,5 @@
-import {EmbedBuilder, Message, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, Message} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'messageUpdate',
@@ -9,6 +9,7 @@ export default {
       .setColor(0xffff00)
       .setTitle("Zpráva upravena")
       .setFooter({text: `ID: ${newMessage.author.id}`})
+      .setURL(newMessage.url)
       .setTimestamp();
     // Content
     if (oldMessage.content !== newMessage.content) {
@@ -24,8 +25,6 @@ export default {
     }
     // Author
     embed.addFields({name: "Autor", value: newMessage.author.tag});
-    const sendChannel = oldMessage.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newMessage.client);
   }
 }

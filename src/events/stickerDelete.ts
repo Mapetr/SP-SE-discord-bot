@@ -1,5 +1,5 @@
-import {EmbedBuilder, Sticker, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, Sticker} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'stickerDelete',
@@ -9,12 +9,10 @@ export default {
       .setColor(0xff0000)
       .setTitle("Odebrána nálepka")
       .setFields(
-        { name: "Název", value: sticker.name }
+        {name: "Název", value: sticker.name}
       )
       .setFooter({ text: `ID: ${sticker.id}` })
       .setTimestamp();
-    const sendChannel = sticker.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, sticker.client);
   }
 }

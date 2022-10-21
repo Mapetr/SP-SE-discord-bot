@@ -1,6 +1,6 @@
 import {CategoryChannel, EmbedBuilder, GuildChannel, TextChannel, VoiceChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
 import {convertChannelType} from "../lib/conversion.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'channelUpdate',
@@ -81,9 +81,6 @@ export default {
     if (oldChannel.position !== newChannel.position) {
       embed.addFields({name: 'Pozice', value: `${oldChannel.position} -> ${newChannel.position}`});
     }
-    console.log(embed.toJSON())
-    const sendChannel = oldChannel.guild.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newChannel.client);
   }
 }

@@ -1,6 +1,6 @@
-import {EmbedBuilder, Guild, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, Guild} from "discord.js";
 import {convertExplicitContentFilterLevel, convertGuildFeatures} from "../lib/conversion.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'guildUpdate',
@@ -72,9 +72,6 @@ export default {
     if (oldGuild.memberCount !== newGuild.memberCount) {
       embed.addFields({name: 'Počet členů', value: `${oldGuild.memberCount} -> ${newGuild.memberCount}`});
     }
-
-    const sendChannel = oldGuild.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newGuild.client);
   }
 }

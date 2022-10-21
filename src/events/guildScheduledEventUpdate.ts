@@ -1,5 +1,5 @@
-import {EmbedBuilder, GuildScheduledEvent, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, GuildScheduledEvent} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'guildScheduledEventUpdate',
@@ -36,8 +36,6 @@ export default {
         inline: true
       });
     }
-    const sendChannel = oldEvent.guild?.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newEvent.client);
   }
 }

@@ -1,5 +1,5 @@
-import {EmbedBuilder, TextChannel, User} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, User} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'userUpdate',
@@ -27,8 +27,6 @@ export default {
     if (oldUser.avatar !== newUser.avatar) {
       embed.addFields({name: 'Avatar', value: `${oldUser.avatarURL()} -> ${newUser.avatarURL()}`});
     }
-    const sendChannel = newUser.client.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newUser.client);
   }
 }

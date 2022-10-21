@@ -1,5 +1,5 @@
-import {EmbedBuilder, GuildEmoji, TextChannel} from "discord.js";
-import data from "../../config.json" assert {type: "json"};
+import {EmbedBuilder, GuildEmoji} from "discord.js";
+import {sendLog} from "../lib/sending.js";
 
 export default {
   name: 'emojiUpdate',
@@ -24,8 +24,6 @@ export default {
     if (oldEmoji.roles.cache.size !== newEmoji.roles.cache.size) {
       embed.addFields({name: 'Role', value: `${oldEmoji.roles.cache.size} -> ${newEmoji.roles.cache.size}`});
     }
-    const sendChannel = newEmoji.guild.channels.cache.get(data.channel) as TextChannel;
-    if (sendChannel) await sendChannel.send({embeds: [embed]});
-    else console.error("Events: Channel is non-existent");
+    await sendLog(embed, newEmoji.client);
   }
 }
