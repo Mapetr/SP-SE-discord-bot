@@ -9,8 +9,11 @@ export default {
       .setColor(0x00ff00)
       .setTitle("Role přidána")
       .setFields(
-        { name: 'Jméno', value: role.name }
+        { name: 'Jméno', value: role.name },
+        { name: 'Barva', value: role.hexColor },
+        { name: 'Pozice', value: role.position.toString() },
       )
+      .setImage(role.iconURL())
       .setFooter({ text: `ID: ${role.id}` })
       .setTimestamp();
     const sendChannel = role.client.channels.cache.get(data.channel) as TextChannel;
