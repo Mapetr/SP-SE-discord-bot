@@ -1,4 +1,4 @@
-import {ChannelType, GuildFeature} from "discord-api-types/v10";
+import {ChannelType, GuildFeature, StickerFormatType} from "discord-api-types/v10";
 
 export function convertChannelType(type: ChannelType): string {
   switch (type) {
@@ -109,4 +109,17 @@ export function convertGuildFeatures(features: `${GuildFeature}`[]): string {
     result += `${convertGuildFeature(feature)}, `;
   }
   return result;
+}
+
+export function convertStickerFormat(format: StickerFormatType): string {
+  switch (format) {
+    case StickerFormatType.PNG:
+      return "PNG";
+    case StickerFormatType.APNG:
+      return "APNG";
+    case StickerFormatType.Lottie:
+      return "LOTTIE";
+    default:
+      return "Neznámý formát";
+  }
 }
