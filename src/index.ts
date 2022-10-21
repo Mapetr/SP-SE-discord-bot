@@ -54,7 +54,6 @@ for (const file of eventFiles) {
     }
     if (process.env.NODE_ENV === "dev") console.log(`Loaded event ${event.name}`);
   }).catch((e) => {
-    console.error(e);
     Sentry.captureException(e);
   });
 }
@@ -62,6 +61,5 @@ for (const file of eventFiles) {
 // Login to Discord
 client.login(process.env.TOKEN)
   .catch(err => {
-    console.error(err);
     Sentry.captureException(err);
   });
