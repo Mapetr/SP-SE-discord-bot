@@ -5,6 +5,7 @@ export default {
   name: 'messageUpdate',
   once: false,
   async execute(oldMessage: Message, newMessage: Message) {
+    if (newMessage.author.bot) return;
     const embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle("Zpráva upravena")
