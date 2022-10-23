@@ -1,11 +1,8 @@
-import {EmbedBuilder, VoiceState} from "discord.js";
-import {sendLog} from "../lib/sending.js";
-
 export default {
   name: 'voiceStateUpdate',
   once: false,
-  async execute(oldState: VoiceState, newState: VoiceState) {
-    const embed = new EmbedBuilder()
+  async execute() {
+    /*const embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle("Změněn stav hlasového kanálu")
       .setImage(newState.member?.avatarURL() ?? null)
@@ -47,6 +44,6 @@ export default {
     if (oldState.streaming !== newState.streaming) {
       embed.addFields({name: 'Streaming', value: `${oldState.streaming} -> ${newState.streaming}`});
     }
-    await sendLog(embed, newState.client);
+    await sendLog(embed, newState.client);*/
   }
 }
