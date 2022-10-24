@@ -78,8 +78,8 @@ export default {
       });
     }
     // Position
-    if (oldChannel.position !== newChannel.position) {
-      embed.addFields({name: 'Pozice', value: `${oldChannel.position} -> ${newChannel.position}`});
+    if (oldChannel.rawPosition !== newChannel.rawPosition) {
+      embed.addFields({name: 'Pozice', value: `${oldChannel.rawPosition} -> ${newChannel.rawPosition}`});
     }
     await sendLog(embed, newChannel.client);
   }

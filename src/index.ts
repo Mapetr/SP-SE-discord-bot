@@ -6,6 +6,7 @@ import * as fs from "fs";
 import {fileURLToPath} from "url";
 import "dotenv/config";
 import {GatewayIntentBits} from "discord-api-types/v10";
+import * as mongoose from "mongoose";
 
 // Setup for Sentry
 Sentry.init({
@@ -33,13 +34,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
+if (process.env.MONGOURI) mongoose.connect(process.env.MONGOURI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch(err => console.log(err));
+else throw new Error("MONGOURI is not defined in .env");
+
 // Attach events to client
 for (const file of eventFiles) {
   const filePath = path.join(eventsPath, file);
   import(filePath).then((event) => {
     event = event.default
     if (event.once) {
-      client.once(event.name, (...args) => event.execute(...args).catch((err: Error) => {Sentry.captureException(err);}));
+      client.once(event.name, (...args) => event.execute(...args).catch((err: Error) => {
+        Sentry.captureException(err);
+      }));
     } else {
       client.on(event.name, (...args) => {
         const transaction = Sentry.startTransaction({

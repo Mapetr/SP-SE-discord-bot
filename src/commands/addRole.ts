@@ -32,7 +32,7 @@ export const AddRole: Command = {
       name: "emoji",
       description: "Volitelne emoji pro tlacitko",
       type: ApplicationCommandOptionType.String,
-      required: false
+      required: false,
     }
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
