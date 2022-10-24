@@ -29,6 +29,6 @@ export const AddCitat: Command = {
     const obj = new Quotes({quote: quote, teacher, author, time});
     await obj.save();
 
-    await interaction.reply({content: "Citat byl přidán"});
+    await interaction.reply({content: `> ${quote}\n- ${teacher} ${new Date(time).getFullYear()}`});
   }
 };

@@ -22,6 +22,6 @@ export const Citat: Command = {
       return;
     }
     const quote = res[Math.floor(Math.random() * res.length)];
-    await interaction.reply({content: `> ${quote.quote}\n- ${quote.teacher}`});
+    await interaction.reply({content: `> ${quote.quote}\n- ${quote.teacher} ${new Date(quote.time).getFullYear()}`});
   }
 };
