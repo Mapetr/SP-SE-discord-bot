@@ -17,6 +17,6 @@ export default {
       .setURL(event.url)
       .setFooter({ text: `ID: ${event.id}` })
       .setTimestamp();
-    await sendLog(embed, event.client);
+    await sendLog(embed, event.client, event.guildId);
   }
 }

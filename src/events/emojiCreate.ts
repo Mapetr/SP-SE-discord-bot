@@ -17,6 +17,6 @@ export default {
       .setImage(emoji.url)
       .setFooter({ text: `ID: ${emoji.id}` })
       .setTimestamp();
-    await sendLog(embed, emoji.client);
+    await sendLog(embed, emoji.client, emoji.guild.id);
   }
 }

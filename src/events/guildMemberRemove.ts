@@ -15,6 +15,6 @@ export default {
       .setImage(member.avatarURL())
       .setFooter({ text: `ID: ${member.id}` })
       .setTimestamp();
-    await sendLog(embed, member.client);
+    await sendLog(embed, member.client, member.guild.id);
   }
 }

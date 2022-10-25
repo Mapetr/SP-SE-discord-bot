@@ -81,6 +81,6 @@ export default {
     if (oldChannel.rawPosition !== newChannel.rawPosition) {
       embed.addFields({name: 'Pozice', value: `${oldChannel.rawPosition} -> ${newChannel.rawPosition}`});
     }
-    await sendLog(embed, newChannel.client);
+    await sendLog(embed, newChannel.client, newChannel.guild.id);
   }
 }

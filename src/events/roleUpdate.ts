@@ -30,6 +30,6 @@ export default {
     if (oldRole.unicodeEmoji !== newRole.unicodeEmoji) {
       embed.addFields({name: 'Unicode emoji', value: `${oldRole.unicodeEmoji} -> ${newRole.unicodeEmoji}`});
     }
-    await sendLog(embed, newRole.client);
+    await sendLog(embed, newRole.client, newRole.guild.id);
   }
 }

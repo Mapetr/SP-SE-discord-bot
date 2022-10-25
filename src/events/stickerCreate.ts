@@ -18,6 +18,6 @@ export default {
       .setImage(sticker.url)
       .setFooter({ text: `ID: ${sticker.id}` })
       .setTimestamp();
-    await sendLog(embed, sticker.client);
+    await sendLog(embed, sticker.client, sticker.guildId ?? '');
   }
 }

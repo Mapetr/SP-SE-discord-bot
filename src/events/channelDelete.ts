@@ -14,6 +14,6 @@ export default {
       .setURL(channel.url)
       .setFooter({ text: `ID: ${channel.id}` })
       .setTimestamp();
-    await sendLog(embed, channel.client);
+    await sendLog(embed, channel.client, channel.guild.id);
   }
 }

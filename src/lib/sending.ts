@@ -1,10 +1,11 @@
-import data from "../../config.json" assert {type: "json"};
 import {Client, EmbedBuilder, TextChannel} from "discord.js";
-import {captureException} from "@sentry/node";
+import {Log} from "./models.js";
 
-export async function sendLog(embed: EmbedBuilder, client: Client) {
+export async function sendLog(embed: EmbedBuilder, client: Client, guild: string): Promise<void> {
   if (embed.data.fields?.length === 0) return;
-  const sendChannel = client.channels.cache.get(data.channel) as TextChannel;
-  if (sendChannel) await sendChannel.send({embeds: [embed]});
-  else captureException("Events: Channel is non-existent");
+  const channel = (await Log.findOne({guild: guild}).exec())?.channel;
+  if (!channel) return;
+  const sendChannel = client.channels.cache.get(channel) as TextChannel;
+  if (!sendChannel) return;
+  await sendChannel.send({embeds: [embed]});
 }

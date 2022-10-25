@@ -16,6 +16,6 @@ export default {
       )
       .setFooter({ text: `ID: ${thread.id}` })
       .setTimestamp();
-    await sendLog(embed, thread.client);
+    await sendLog(embed, thread.client, thread.guildId);
   }
 }

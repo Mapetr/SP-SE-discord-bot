@@ -15,6 +15,6 @@ export default {
       .setImage(event.image)
       .setFooter({ text: `ID: ${event.id}` })
       .setTimestamp();
-    await sendLog(embed, event.client);
+    await sendLog(embed, event.client, event.guildId);
   }
 }

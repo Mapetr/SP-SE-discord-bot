@@ -36,6 +36,6 @@ export default {
         inline: true
       });
     }
-    await sendLog(embed, newEvent.client);
+    await sendLog(embed, newEvent.client, newEvent.guildId);
   }
 }

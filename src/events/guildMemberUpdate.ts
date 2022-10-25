@@ -36,6 +36,6 @@ export default {
     if (oldMember.presence?.status !== newMember.presence?.status) {
       embed.addFields({name: 'Stav', value: `${oldMember.presence?.status} -> ${newMember.presence?.status}`});
     }
-    await sendLog(embed, newMember.client);
+    await sendLog(embed, newMember.client, newMember.guild.id);
   }
 }

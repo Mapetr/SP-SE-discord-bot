@@ -26,6 +26,6 @@ export default {
     }
     // Author
     embed.addFields({name: "Autor", value: newMessage.author.tag});
-    await sendLog(embed, newMessage.client);
+    await sendLog(embed, newMessage.client, newMessage.guildId ?? '');
   }
 }

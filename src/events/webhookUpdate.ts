@@ -13,6 +13,6 @@ export default {
       )
       .setFooter({ text: `ID: ${channel.id}` })
       .setTimestamp();
-    await sendLog(embed, channel.client);
+    await sendLog(embed, channel.client, channel.guildId);
   }
 }

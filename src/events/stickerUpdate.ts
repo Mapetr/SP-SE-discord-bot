@@ -32,6 +32,6 @@ export default {
     if (oldSticker.tags !== newSticker.tags) {
       embed.addFields({name: "Tagy", value: `${oldSticker.tags} -> ${newSticker.tags}`});
     }
-    await sendLog(embed, newSticker.client);
+    await sendLog(embed, newSticker.client, newSticker.guildId ?? '');
   }
 }

@@ -18,6 +18,6 @@ export default {
     if (oldStage.privacyLevel !== newStage.privacyLevel) {
       embed.addFields({ name: 'Level soukromí', value: `${oldStage.privacyLevel} -> ${newStage.privacyLevel}` });
     }
-    await sendLog(embed, newStage.client);
+    await sendLog(embed, newStage.client, newStage.guildId);
   }
 }

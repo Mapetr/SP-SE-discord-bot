@@ -13,6 +13,6 @@ export default {
       )
       .setFooter({ text: `ID: ${stage.id}` })
       .setTimestamp();
-    await sendLog(embed, stage.client);
+    await sendLog(embed, stage.client, stage.guildId);
   }
 }

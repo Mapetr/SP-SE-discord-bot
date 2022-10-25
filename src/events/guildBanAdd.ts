@@ -16,6 +16,6 @@ export default {
       .setImage(ban.user.avatarURL())
       .setFooter({ text: `ID: ${ban.user.id}` })
       .setTimestamp();
-    await sendLog(embed, ban.client);
+    await sendLog(embed, ban.client, ban.guild.id);
   }
 }

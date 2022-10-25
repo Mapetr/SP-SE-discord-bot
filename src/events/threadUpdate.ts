@@ -27,6 +27,6 @@ export default {
     if (oldThread.type !== newThread.type) {
       embed.addFields({name: "Typ", value: `${oldThread.type} -> ${newThread.type}`});
     }
-    await sendLog(embed, newThread.client);
+    await sendLog(embed, newThread.client, newThread.guildId);
   }
 }

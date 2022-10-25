@@ -16,6 +16,6 @@ export default {
       .setImage(role.iconURL())
       .setFooter({ text: `ID: ${role.id}` })
       .setTimestamp();
-    await sendLog(embed, role.client);
+    await sendLog(embed, role.client, role.guild.id);
   }
 }

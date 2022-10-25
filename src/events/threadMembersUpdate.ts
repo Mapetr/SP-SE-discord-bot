@@ -23,6 +23,6 @@ export default {
     if (removed !== "") {
       embed.addFields({name: "Odebráno", value: removed});
     }
-    await sendLog(embed, thread.client);
+    await sendLog(embed, thread.client, thread.guildId);
   }
 }

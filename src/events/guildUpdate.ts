@@ -72,6 +72,6 @@ export default {
     if (oldGuild.memberCount !== newGuild.memberCount) {
       embed.addFields({name: 'Počet členů', value: `${oldGuild.memberCount} -> ${newGuild.memberCount}`});
     }
-    await sendLog(embed, newGuild.client);
+    await sendLog(embed, newGuild.client, newGuild.id);
   }
 }

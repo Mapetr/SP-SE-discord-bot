@@ -1,11 +1,9 @@
-import {EmbedBuilder, User} from "discord.js";
-import {sendLog} from "../lib/sending.js";
-
 export default {
   name: 'userUpdate',
   once: false,
-  async execute(oldUser: User, newUser: User) {
-    const embed = new EmbedBuilder()
+  async execute() {
+    return;
+    /*const embed = new EmbedBuilder()
       .setColor(0xffff00)
       .setTitle("Uživatel upraven")
       .setImage(newUser.avatarURL())
@@ -27,6 +25,6 @@ export default {
     if (oldUser.avatar !== newUser.avatar) {
       embed.addFields({name: 'Avatar', value: `${oldUser.avatarURL()} -> ${newUser.avatarURL()}`});
     }
-    await sendLog(embed, newUser.client);
+    await sendLog(embed, newUser.client);*/
   }
 }

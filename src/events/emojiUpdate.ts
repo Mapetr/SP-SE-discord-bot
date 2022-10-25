@@ -24,6 +24,6 @@ export default {
     if (oldEmoji.roles.cache.size !== newEmoji.roles.cache.size) {
       embed.addFields({name: 'Role', value: `${oldEmoji.roles.cache.size} -> ${newEmoji.roles.cache.size}`});
     }
-    await sendLog(embed, newEmoji.client);
+    await sendLog(embed, newEmoji.client, newEmoji.guild.id);
   }
 }

@@ -14,6 +14,6 @@ export default {
       )
       .setFooter({ text: `ID: ${message.author.id}` })
       .setTimestamp();
-    await sendLog(embed, message.client);
+    await sendLog(embed, message.client, message.guildId ?? '');
   }
 }

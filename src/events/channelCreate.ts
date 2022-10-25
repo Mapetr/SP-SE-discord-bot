@@ -6,6 +6,7 @@ export default {
   name: 'channelCreate',
   once: false,
   async execute(channel: GuildChannel) {
+    if (channel.isDMBased()) return;
     const embed = new EmbedBuilder()
       .setColor(0x00ff00)
       .setTitle("Kanál vytvořen")
@@ -14,6 +15,7 @@ export default {
       .setURL(channel.url)
       .setFooter({text: `Channel ID: ${channel.id}`})
       .setTimestamp();
-    await sendLog(embed, channel.client);
+
+    await sendLog(embed, channel.client, channel.guild.id);
   }
 }

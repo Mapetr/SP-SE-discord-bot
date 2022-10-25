@@ -18,6 +18,6 @@ export default {
       .setURL(invite.url)
       .setFooter({ text: `ID: ${invite.inviterId}` })
       .setTimestamp();
-    await sendLog(embed, invite.client);
+    await sendLog(embed, invite.client, invite.guild?.id ?? '');
   }
 }
