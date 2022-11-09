@@ -15,16 +15,24 @@ export const AddCitat: Command = {
     },
     {
       name: "teacher",
-      description: "Učitel (Přijmení)",
+      description: "Učitel (Přijmení) NEPIŠTE ROK",
       type: ApplicationCommandOptionType.String,
       required: true
+    },
+    {
+      name: "date",
+      description: "Datum (DD.MM.YYYY)",
+      type: ApplicationCommandOptionType.String,
+      required: false
     }
   ],
   run: async (client: Client, interaction: CommandInteraction) => {
     const quote = interaction.options.get("quote")?.value as string;
     const teacher = interaction.options.get("teacher")?.value as string;
+    const date = interaction.options.get("date")?.value as string;
     const author = interaction.user.tag;
-    const time = Date.now();
+    const dateArr = date.split(".");
+    const time = date ? new Date(parseInt(dateArr[2]), parseInt(dateArr[1]), parseInt(dateArr[0])) : Date.now();
 
     const obj = new Quotes({quote: quote, teacher, author, time});
     await obj.save();
