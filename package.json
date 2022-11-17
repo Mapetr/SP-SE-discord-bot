@@ -11,7 +11,7 @@
   "dependencies": {
     "@discordjs/voice": "^0.13.0",
     "@sentry/node": "^7.16.0",
-    "@sentry/tracing": "^7.16.0",
+    "@sentry/tracing": "^7.17.1",
     "bufferutil": "^4.0.7",
     "discord.js": "^14.6.0",
     "dotenv": "^16.0.3",
