@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dc24944c-aeef-4594-a153-c2abb68bc2ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/appwrite.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileloader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/logchannel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/logchannel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/mod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/mod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helpers.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file:///usr/lib/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="microk8s" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="gfakcj5l" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectId" id="2EqnDgFv0kXpQfLM5meVVU1W7J4" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;TF_FMT&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/petr/IdeaProjects/SPSSE-discord-bot&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/petr/.local/share/JetBrains/Toolbox/apps/IDEA-U/ch-1/223.7571.123/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TypeScript&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="#org.intellij.plugins.hcl.terraform.run.TerraformConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Deno: main.ts" type="DenoConfigurationType" nameIsGenerated="true" exePath="$USER_HOME$/.deno/bin/denon" inputPath="$PROJECT_DIR$/main.ts" programParameters="run">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dc24944c-aeef-4594-a153-c2abb68bc2ed" name="Changes" comment="" />
+      <created>1663331864253</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1663331864253</updated>
+      <workItem from="1663331866245" duration="858000" />
+      <workItem from="1663334421896" duration="1858000" />
+      <workItem from="1663357223571" duration="1515000" />
+      <workItem from="1663587351223" duration="29000" />
+      <workItem from="1663587433744" duration="2724000" />
+      <workItem from="1663674157980" duration="766000" />
+      <workItem from="1663677594495" duration="200000" />
+      <workItem from="1663744124303" duration="1970000" />
+      <workItem from="1663746727540" duration="561000" />
+      <workItem from="1663747944681" duration="2000000" />
+      <workItem from="1663752336434" duration="264000" />
+      <workItem from="1663834319623" duration="5018000" />
+      <workItem from="1663938331059" duration="1091000" />
+      <workItem from="1663939450793" duration="1263000" />
+      <workItem from="1664043148366" duration="2000" />
+      <workItem from="1664043357844" duration="4105000" />
+      <workItem from="1664056823368" duration="83000" />
+      <workItem from="1664065726024" duration="1073000" />
+      <workItem from="1664100339947" duration="3512000" />
+      <workItem from="1664224865174" duration="48000" />
+      <workItem from="1664304836399" duration="884000" />
+      <workItem from="1664360149704" duration="4509000" />
+      <workItem from="1664376724663" duration="2447000" />
+      <workItem from="1664391847424" duration="876000" />
+      <workItem from="1664396479328" duration="2055000" />
+      <workItem from="1664487957212" duration="24000" />
+      <workItem from="1664627572913" duration="19392000" />
+      <workItem from="1664712872755" duration="1204000" />
+      <workItem from="1664737683145" duration="1555000" />
+      <workItem from="1664898892049" duration="13000" />
+      <workItem from="1665234133083" duration="1535000" />
+      <workItem from="1665236242912" duration="4429000" />
+      <workItem from="1665242716432" duration="5000" />
+      <workItem from="1665823769014" duration="1068000" />
+      <workItem from="1665825953657" duration="2061000" />
+      <workItem from="1665828449335" duration="10061000" />
+      <workItem from="1665845477385" duration="37000" />
+      <workItem from="1666284347452" duration="9474000" />
+      <workItem from="1666374393424" duration="136000" />
+      <workItem from="1666374544383" duration="9089000" />
+      <workItem from="1666542394132" duration="5676000" />
+      <workItem from="1666600786588" duration="24000" />
+      <workItem from="1666607042867" duration="1581000" />
+      <workItem from="1666613748506" duration="18000" />
+      <workItem from="1666617969519" duration="2152000" />
+      <workItem from="1666647941407" duration="5303000" />
+      <workItem from="1666653314411" duration="320000" />
+      <workItem from="1666681323707" duration="3684000" />
+      <workItem from="1666692950833" duration="224000" />
+      <workItem from="1666694657857" duration="2689000" />
+      <workItem from="1666997745562" duration="58000" />
+      <workItem from="1669401000063" duration="1279000" />
+      <workItem from="1669463507187" duration="21727000" />
+      <workItem from="1669507560855" duration="3099000" />
+      <workItem from="1669511778984" duration="986000" />
+      <workItem from="1669513289752" duration="3745000" />
+      <workItem from="1669542007799" duration="666000" />
+    </task>
+    <task id="LOCAL-00001" summary="change to modules and esnext">
+      <created>1664071783888</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1664071783888</updated>
+    </task>
+    <task id="LOCAL-00002" summary="update pkgs + added create role command">
+      <created>1664401253993</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1664401253993</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added functionality to reaction roles">
+      <created>1664645536180</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1664645536180</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added functionality to reaction roles">
+      <created>1664645689086</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1664645689086</updated>
+    </task>
+    <task id="LOCAL-00005" summary="turn setChannel into interaction">
+      <created>1664662686087</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1664662686087</updated>
+    </task>
+    <task id="LOCAL-00006" summary="change to nodenext">
+      <created>1665826358736</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1665826358736</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add improvements to channel events">
+      <created>1665844422159</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1665844422159</updated>
+    </task>
+    <task id="LOCAL-00008" summary="change types.ts to conversion.ts">
+      <created>1666286429422</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1666286429422</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add URL to channel and emoji events">
+      <created>1666286475819</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1666286475819</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Rework emojiUpdate.ts">
+      <created>1666286488370</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1666286488370</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Rework guildMemberUpdate.ts">
+      <created>1666286498756</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1666286498756</updated>
+    </task>
+    <task id="LOCAL-00012" summary="remove invalid TODO">
+      <created>1666288765078</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1666288765078</updated>
+    </task>
+    <task id="LOCAL-00013" summary="rework guildEvents">
+      <created>1666288779642</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1666288779642</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add description to guildEvent">
+      <created>1666292860322</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1666292860322</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add conversions to conversion.ts">
+      <created>1666294679681</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1666294679681</updated>
+    </task>
+    <task id="LOCAL-00016" summary="rework guildUpdate.ts">
+      <created>1666294692292</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1666294692292</updated>
+    </task>
+    <task id="LOCAL-00017" summary="rework invite events">
+      <created>1666295413805</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1666295413805</updated>
+    </task>
+    <task id="LOCAL-00018" summary="rework messageUpdate.ts">
+      <created>1666296272840</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1666296272840</updated>
+    </task>
+    <task id="LOCAL-00019" summary="rework thread">
+      <created>1666377323880</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1666377323880</updated>
+    </task>
+    <task id="LOCAL-00020" summary="rework userUpdate.ts">
+      <created>1666379876061</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1666379876061</updated>
+    </task>
+    <task id="LOCAL-00021" summary="rework voiceStateUpdate.ts">
+      <created>1666379886622</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1666379886622</updated>
+    </task>
+    <task id="LOCAL-00022" summary="rework sending embeds">
+      <created>1666382968663</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1666382968663</updated>
+    </task>
+    <task id="LOCAL-00023" summary="return empty field embeds">
+      <created>1666383090798</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1666383090798</updated>
+    </task>
+    <task id="LOCAL-00024" summary="remove useless console logs">
+      <created>1666383723956</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1666383723956</updated>
+    </task>
+    <task id="LOCAL-00025" summary="update and bump version">
+      <created>1666384551456</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1666384551456</updated>
+    </task>
+    <task id="LOCAL-00026" summary="skip bot messageUpdate">
+      <created>1666548311733</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1666548311733</updated>
+    </task>
+    <task id="LOCAL-00027" summary="skip voiceStateUpdate.ts">
+      <created>1666548369299</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1666548369299</updated>
+    </task>
+    <task id="LOCAL-00028" summary="add quotes, minor fixes">
+      <created>1666652897136</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1666652897136</updated>
+    </task>
+    <task id="LOCAL-00029" summary="add year to quotes">
+      <created>1666653513824</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1666653513824</updated>
+    </task>
+    <task id="LOCAL-00030" summary="initialize discordeno project">
+      <created>1669494135643</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1669494135644</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Add improvements to channel events" />
+    <MESSAGE value="change types.ts to conversion.ts" />
+    <MESSAGE value="add URL to channel and emoji events" />
+    <MESSAGE value="Rework emojiUpdate.ts" />
+    <MESSAGE value="Rework guildMemberUpdate.ts" />
+    <MESSAGE value="remove invalid TODO" />
+    <MESSAGE value="rework guildEvents" />
+    <MESSAGE value="add description to guildEvent" />
+    <MESSAGE value="add conversions to conversion.ts" />
+    <MESSAGE value="rework guildUpdate.ts" />
+    <MESSAGE value="rework invite events" />
+    <MESSAGE value="rework messageUpdate.ts" />
+    <MESSAGE value="rework thread" />
+    <MESSAGE value="rework userUpdate.ts" />
+    <MESSAGE value="rework voiceStateUpdate.ts" />
+    <MESSAGE value="rework sending embeds" />
+    <MESSAGE value="return empty field embeds" />
+    <MESSAGE value="remove useless console logs" />
+    <MESSAGE value="update and bump version" />
+    <MESSAGE value="skip bot messageUpdate" />
+    <MESSAGE value="skip voiceStateUpdate.ts" />
+    <MESSAGE value="add quotes, minor fixes" />
+    <MESSAGE value="add year to quotes" />
+    <MESSAGE value="add multiple server support" />
+    <MESSAGE value="initialize discordeno project" />
+    <option name="LAST_COMMIT_MESSAGE" value="initialize discordeno project" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -1,13 +1,12 @@
 import {
-  ActivityTypes,
   createBot,
   enableCachePlugin,
   enableCacheSweepers,
+  enablePermissionsPlugin,
   fastFileLoader,
   GatewayIntents,
   startBot,
 } from "./deps.ts";
-import * as sdk from "https://deno.land/x/appwrite/mod.ts";
 import { logger } from "./src/utils/logger.ts";
 import { events } from "./src/events/mod.ts";
 import { updateCommands } from "./src/utils/helpers.ts";
@@ -23,37 +22,20 @@ await fastFileLoader(paths).catch((err) => {
   Deno.exit(1);
 });
 
-export const bot = enableCachePlugin(
-  createBot({
-    token: Deno.env.get("TOKEN"),
-    botId: Deno.env.get("BOT_ID"),
-    intents: GatewayIntents.Guilds,
-    events,
-  }),
-);
+export const bot = enableCachePlugin(createBot({
+  token: Deno.env.get("TOKEN") ?? "",
+  botId: BigInt(Deno.env.get("BOT_ID") ?? ""),
+  intents: GatewayIntents.Guilds | GatewayIntents.GuildMessages,
+  events,
+}));
 
-export const appwrite = new sdk.Client()
-  .setEndpoint(Deno.env.get("APPWRITE_ENDPOINT"))
-  .setProject(Deno.env.get("APPWRITE_PROJECT_ID"))
-  .setKey(Deno.env.get("APPWRITE_API_KEY"));
-
-// @ts-nocheck: no-updated-depencdencies
 enableCacheSweepers(bot);
-
-bot.gateway.manager.createShardOptions.makePresence = (shardId: number) => {
-  return {
-    shardId: shardId,
-    status: "online",
-    activities: [
-      {
-        name: "kostik je kokot",
-        type: ActivityTypes.Watching,
-        createdAt: Date.now(),
-      },
-    ],
-  };
-};
+enablePermissionsPlugin(bot);
 
 await startBot(bot);
 
-await updateCommands(bot);
+await updateCommands(bot).catch((err) => {
+  log.fatal("Unable to Update Commands");
+  log.fatal(err);
+  Deno.exit(1);
+});
