@@ -23,8 +23,8 @@ await fastFileLoader(paths).catch((err) => {
 });
 
 export const bot = enableCachePlugin(createBot({
-  token: Deno.env.get("TOKEN") ?? "",
-  botId: BigInt(Deno.env.get("BOT_ID") ?? ""),
+  token: Deno.env.get("TOKEN"),
+  botId: Deno.env.get("BOT_ID"),
   intents: GatewayIntents.Guilds | GatewayIntents.GuildMessages,
   events,
 }));

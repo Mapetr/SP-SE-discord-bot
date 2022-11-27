@@ -1,4 +1,4 @@
-import { ApplicationCommandTypes, InteractionResponseTypes } from "../../deps.ts";
+import { ApplicationCommandTypes, InteractionResponseTypes, Bot, Interaction } from "../../deps.ts";
 import { createCommand } from "./mod.ts";
 import { database } from "../utils/appwrite.ts";
 import { logger } from "../utils/logger.ts";
@@ -11,7 +11,7 @@ createCommand({
   type: ApplicationCommandTypes.ChatInput,
   scope: "Guild",
   userPermissions: ["ADMINISTRATOR"],
-  execute: async (bot, interaction) => {
+  execute: async (bot: Bot, interaction: Interaction) => {
     const channel = interaction.channelId;
     const guild = interaction.guildId;
     const databaseId = Deno.env.get("APPWRITE_DATABASE_ID");

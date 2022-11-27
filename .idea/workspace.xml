@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc24944c-aeef-4594-a153-c2abb68bc2ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/utils/appwrite.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileloader.ts" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/channelCreate.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/channelDelete.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mod.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commands/logchannel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/logchannel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/mod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/mod.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/ping.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ping.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +169,8 @@
       <workItem from="1669507560855" duration="3099000" />
       <workItem from="1669511778984" duration="986000" />
       <workItem from="1669513289752" duration="3745000" />
-      <workItem from="1669542007799" duration="666000" />
+      <workItem from="1669542007799" duration="3935000" />
+      <workItem from="1669561298246" duration="2547000" />
     </task>
     <task id="LOCAL-00001" summary="change to modules and esnext">
       <created>1664071783888</created>
@@ -382,7 +382,28 @@
       <option name="project" value="LOCAL" />
       <updated>1669494135644</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="remove unwanted files">
+      <created>1669542717642</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1669542717642</updated>
+    </task>
+    <task id="LOCAL-00032" summary="add defaultMemberPermissions to slash command">
+      <created>1669542748214</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1669542748214</updated>
+    </task>
+    <task id="LOCAL-00033" summary="add logchannel.ts command">
+      <created>1669542758486</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1669542758486</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,9 +422,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add improvements to channel events" />
-    <MESSAGE value="change types.ts to conversion.ts" />
-    <MESSAGE value="add URL to channel and emoji events" />
     <MESSAGE value="Rework emojiUpdate.ts" />
     <MESSAGE value="Rework guildMemberUpdate.ts" />
     <MESSAGE value="remove invalid TODO" />
@@ -426,7 +444,10 @@
     <MESSAGE value="add year to quotes" />
     <MESSAGE value="add multiple server support" />
     <MESSAGE value="initialize discordeno project" />
-    <option name="LAST_COMMIT_MESSAGE" value="initialize discordeno project" />
+    <MESSAGE value="remove unwanted files" />
+    <MESSAGE value="add defaultMemberPermissions to slash command" />
+    <MESSAGE value="add logchannel.ts command" />
+    <option name="LAST_COMMIT_MESSAGE" value="add logchannel.ts command" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
