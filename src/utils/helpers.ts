@@ -26,14 +26,16 @@ export async function updateCommands(bot: BotWithCache, scope?: "Guild" | "Globa
           name: command.name,
           description: command.description,
           type: command.type,
-          options: command.options ? command.options : undefined,
+          options: command.options ?? undefined,
+          defaultMemberPermissions: command.userPermissions ?? undefined,
         });
       } else if (command.scope === "Global") {
         globalCommands.push({
           name: command.name,
           description: command.description,
           type: command.type,
-          options: command.options ? command.options : undefined,
+          options: command.options ?? undefined,
+          defaultMemberPermissions: command.userPermissions ?? undefined,
         });
       }
     } else {
@@ -41,7 +43,8 @@ export async function updateCommands(bot: BotWithCache, scope?: "Guild" | "Globa
         name: command.name,
         description: command.description,
         type: command.type,
-        options: command.options ? command.options : undefined,
+        options: command.options ?? undefined,
+        defaultMemberPermissions: command.userPermissions ?? undefined,
       });
     }
   }
@@ -53,7 +56,7 @@ export async function updateCommands(bot: BotWithCache, scope?: "Guild" | "Globa
 
   if (perGuildCommands.length && (scope === "Guild" || scope === undefined)) {
     await bot.guilds.forEach(async (guild: Guild) => {
-      await upsertGuildApplicationCommands(bot, guild.id, perGuildCommands);
+      await upsertGuildApplicationCommands(bot, guild.id, perGuildCommands).catch(log.error);
     });
   }
 }
@@ -69,7 +72,8 @@ export async function updateGuildCommands(bot: Bot, guild: Guild) {
           name: command.name,
           description: command.description,
           type: command.type,
-          options: command.options ? command.options : undefined,
+          options: command.options ?? undefined,
+          defaultMemberPermissions: command.userPermissions ?? undefined,
         });
       }
     }

@@ -13,6 +13,7 @@ export interface Command {
   type: ApplicationCommandTypes;
   /** Defaults to `Guild` */
   scope?: "Global" | "Guild";
+  userPermissions?: string[];
   execute: (bot: Bot, interaction: Interaction) => unknown;
   subcommands?: Array<subCommandGroup | subCommand>;
 }
