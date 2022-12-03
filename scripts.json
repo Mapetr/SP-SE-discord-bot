@@ -5,6 +5,7 @@
       "cmd": "deno run main.ts",
       "desc": "run my main.ts file",
       "allow": ["net", "read", "write", "env"],
+      "importMap": "import_map.json",
       "unstable": true
     }
   }

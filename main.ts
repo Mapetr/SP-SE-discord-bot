@@ -1,35 +1,44 @@
-import "https://deno.land/x/dotenv@v3.2.0/load.ts";
-import * as Discord from 'https://deno.land/x/discord_api_types@0.37.20/v10.ts';
+import "https://deno.land/std@0.167.0/dotenv/load.ts";
+import { APIInteraction, InteractionType, InteractionResponseType } from 'https://deno.land/x/discord_api_types@0.37.19/v10.ts';
 import * as oak from "https://deno.land/x/oak@v11.1.0/mod.ts";
-import { verifyKey } from "npm:discord-interactions@^3.2.0";
-import { commands } from "./commands/mod.ts";
-import { SendReply } from "./util/mod.ts";
+import { commands, Command } from "./commands/mod.ts";
+import { SendReply, verifyKey } from "./util/mod.ts";
 
 const router = new oak.Router();
 
 router.post("/", async (ctx) => {
   const message = await ctx.request.body({ type: "json" }).value;
   switch (message.type) {
-    case Discord.InteractionType.Ping:
+    case InteractionType.Ping:
+    {
       ctx.response.body = {
-        type: Discord.InteractionResponseType.Pong,
+        type: InteractionResponseType.Pong,
       };
       return;
-    case Discord.InteractionType.ApplicationCommand:
-      const command = commands.find((command) => command.name === message.data.name);
+    }
+    case InteractionType.ApplicationCommand:
+    {
+      const interaction = message as APIInteraction;
+      const name = message.data.name;
+      const command = commands.find((command: Command) => command.name === name);
       if (command) {
-        ctx.response.body = await command.execute().catch(console.error);
-        console.log(ctx.response.body);
+        const response = await command.execute(interaction).catch(console.error);
+        if (response) {
+          ctx.response.body = response;
+        } else {
+          ctx.response.body = SendReply("An error occurred.", true);
+        }
       } else {
-        console.log(`Command ${command.name} not found.`);
-        ctx.response.body = SendReply(`Command ${command.name} not found.`);
+        console.log(`Command ${name} not found.`);
+        ctx.response.body = SendReply(`Command ${name} not found.`, true);
       }
       return;
+    }
   }
 });
 
 router.get("/", async (ctx) => {
-  const token = Deno.env.get('TOKEN');
+  const token = Deno.env.get("TOKEN");
   const applicationId = Deno.env.get('APPLICATION_ID');
   if (!token || !applicationId) {
     throw new Error('Missing token or applicationId');
@@ -38,14 +47,15 @@ router.get("/", async (ctx) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bot ${token}`,
+      'Authorization': `Bot ${token}`,
     },
     body: JSON.stringify(commands),
   }).then((res) => {
-    return ctx.response.body = 'Registered all commands';
+    console.log(res.body);
+    ctx.response.body = 'Registered all commands';
   }).catch((err) => {
     console.log(`Error: ${err}`);
-    return ctx.response.body = 'Error registering commands';
+    ctx.response.body = 'Error registering commands';
   });
 });
 
@@ -67,11 +77,11 @@ app.use(async (context, next) => {
 
 app.use(async (ctx, next) => {
   if (ctx.request.method === "POST") {
-    const signature = ctx.request.headers.get("X-Signature-Ed25519");
-    const timestamp = ctx.request.headers.get("X-Signature-Timestamp");
+    const signature = ctx.request.headers.get("X-Signature-Ed25519") ?? "";
+    const timestamp = ctx.request.headers.get("X-Signature-Timestamp") ?? "";
     const body = await ctx.request.body({ type: "text" }).value;
     const publicKey = Deno.env.get("PUBLIC_KEY") ?? "";
-    const isValid = verifyKey(
+    const isValid = await verifyKey(
       body,
       signature,
       timestamp,

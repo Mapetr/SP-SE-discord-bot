@@ -1,11 +1,18 @@
-import { InteractionResponseType, MessageFlags } from 'https://deno.land/x/discord_api_types@0.37.20/v10.ts';
+import {
+  APIInteractionResponse,
+  InteractionResponseType,
+  MessageFlags
+} from 'https://deno.land/x/discord_api_types@0.37.20/v10.ts';
 
-export function SendReply(message: string, ephemeral: boolean = false) {
-  return {
+export function SendReply(message: string, ephemeral: boolean): APIInteractionResponse {
+  const response: APIInteractionResponse = {
     type: InteractionResponseType.ChannelMessageWithSource,
     data: {
       content: message,
-      flags: ephemeral ?? MessageFlags.Ephemeral,
     }
   }
+  if (ephemeral) {
+    response.data.flags = MessageFlags.Ephemeral;
+  }
+  return response;
 }
