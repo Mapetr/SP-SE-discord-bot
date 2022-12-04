@@ -1,10 +1,23 @@
 import "https://deno.land/std@0.167.0/dotenv/load.ts";
-import { APIInteraction, InteractionType, InteractionResponseType } from 'https://deno.land/x/discord_api_types@0.37.19/v10.ts';
+import {
+  APIInteraction,
+  InteractionType,
+  InteractionResponseType,
+} from 'https://deno.land/x/discord_api_types@0.37.20/v10.ts';
 import * as oak from "https://deno.land/x/oak@v11.1.0/mod.ts";
+import axiod from "https://deno.land/x/axiod@0.26.2/mod.ts";
 import { commands, Command } from "./commands/mod.ts";
 import { SendReply, verifyKey } from "./util/mod.ts";
+import {Client, Databases} from "https://deno.land/x/appwrite/mod.ts";
 
 const router = new oak.Router();
+
+const client = new Client()
+  .setEndpoint(Deno.env.get("APPWRITE_ENDPOINT") || "")
+  .setProject(Deno.env.get("APPWRITE_PROJECT_ID") || "")
+  .setKey(Deno.env.get("APPWRITE_API_KEY") || "");
+
+const database = new Databases(client);
 
 router.post("/", async (ctx) => {
   const message = await ctx.request.body({ type: "json" }).value;
@@ -37,41 +50,55 @@ router.post("/", async (ctx) => {
   }
 });
 
+router.get("/auth/:code", async (ctx) => {
+  const code = ctx.params.code;
+  const databaseId = Deno.env.get("APPWRITE_DATABASE_ID") || "";
+  const collectionId = Deno.env.get("APPWRITE_AUTH_ID") || "";
+  const data = await database.getDocument(databaseId, collectionId, code);
+  if (!data) {
+    return ctx.response.body = "Invalid code.";
+  }
+  if (data.expires < Date.now()) {
+    database.deleteDocument(databaseId, collectionId, code);
+    ctx.response.body = "Code expired.";
+    return;
+  }
+  await oak.send(ctx, "./static/code.html");
+});
+
 router.get("/", async (ctx) => {
   const token = Deno.env.get("TOKEN");
   const applicationId = Deno.env.get('APPLICATION_ID');
   if (!token || !applicationId) {
     throw new Error('Missing token or applicationId');
   }
-  await fetch(`https://discord.com/api/v10/applications/${applicationId}/commands`, {
-    method: 'PUT',
+  let commandsFinal: Partial<Command> = commands;
+  commandsFinal.forEach((command) => {
+    delete command.execute;
+  });
+  console.log(JSON.stringify(commandsFinal));
+  axiod({
+    method: "PUT",
+    url: `https://discord.com/api/v10/applications/${applicationId}/commands`,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bot ${token}`,
+      'User-Agent': 'DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)',
     },
-    body: JSON.stringify(commands),
-  }).then((res) => {
-    console.log(res.body);
-    ctx.response.body = 'Registered all commands';
-  }).catch((err) => {
-    console.log(`Error: ${err}`);
-    ctx.response.body = 'Error registering commands';
-  });
+    data: JSON.stringify(commandsFinal),
+  })
+  return;
 });
 
-const app = new oak.Application();
+const app = new oak.Application();//{ serverConstructor: oak.FlashServer });
 
 app.use(async (context, next) => {
   try {
     await next();
   } catch (err) {
-    if (oak.isHttpError(err)) {
-      context.response.status = err.status;
-    } else {
-      context.response.status = 500;
-    }
-    context.response.body = { error: err.message };
-    context.response.type = "json";
+    console.log(err);
+    context.response.status = 500;
+    context.response.body = { error: "to dělal asi někdo úplně neschopnej, asi nějaká paní" };
   }
 });
 
