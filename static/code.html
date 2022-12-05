@@ -52,7 +52,7 @@
               r(res.accessToken);
             })
             .catch((err) => {
-	            if (err instanceof InteractionRequiredAuthError) {
+	            if (err instanceof msal.InteractionRequiredAuthError) {
                 msalInstance.acquireTokenPopup(req)
                     .then((res) => {
                         r(res.accessToken);
