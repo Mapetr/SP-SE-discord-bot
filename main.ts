@@ -52,6 +52,10 @@ router.post("/", async (ctx) => {
   }
 });
 
+router.get("/libs/:path+", async (ctx) => {
+  return await oak.send(ctx, `./libs/${ctx.params.path}`);
+});
+
 router.get("/auth/:code", async (ctx) => {
   const code = ctx.params.code;
   const collectionId = Deno.env.get("APPWRITE_AUTH_ID") || "";
@@ -74,7 +78,6 @@ router.put("/auth/resp/:code", async (ctx) => {
   const data = await database.getDocument(databaseId, collectionId, code).catch((err) => {
     console.error(err);
   });
-  console.log(data);
   if (!data) {
     return ctx.response.body = "Invalid code.";
   }
@@ -95,7 +98,7 @@ router.put("/auth/resp/:code", async (ctx) => {
     console.error(err);
   });
   let specRole = role.data.find((role: any) => role.name === message.department);
-  specRole = specRole.id;
+  const memberRole = role.data.find((role: any) => role.name === "Member");
   if (!specRole) {
     await axiod(`https://discord.com/api/v10/guilds/${guildId}/roles`, {
       method: "POST",
@@ -112,10 +115,30 @@ router.put("/auth/resp/:code", async (ctx) => {
     }).catch((err) => {
       console.error(err);
     });
+  } else {
+    specRole = specRole.id;
   }
   let name = message.name.split(" ");
   name.pop();
   name = name.join(" ");
+  await axiod(`https://discord.com/api/v10/guilds/${guildId}/members/${userId}/roles/${specRole}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bot ${Deno.env.get("TOKEN")}`,
+      "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)",
+    }
+  }).catch((err) => {
+    console.error(err);
+  });
+  await axiod(`https://discord.com/api/v10/guilds/${guildId}/members/${userId}/roles/${memberRole.id}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bot ${Deno.env.get("TOKEN")}`,
+      "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)",
+    }
+  }).catch((err) => {
+    console.error(err);
+  });
   await axiod(`https://discord.com/api/v10/guilds/${guildId}/members/${userId}`, {
     method: 'PATCH',
     headers: {
@@ -126,17 +149,6 @@ router.put("/auth/resp/:code", async (ctx) => {
     data: {
       nick: name,
     },
-  }).then((res) => {
-    console.log(res);
-  }).catch((err) => {
-    console.error(err);
-  });
-  await axiod(`https://discord.com/api/v10/guilds/${guildId}/members/${userId}/roles/${specRole}`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bot ${Deno.env.get("TOKEN")}`,
-      "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)",
-    }
   }).catch((err) => {
     console.error(err);
   });
