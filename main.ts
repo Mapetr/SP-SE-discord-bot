@@ -55,6 +55,46 @@ router.post("/", async (ctx) => {
       }
       return;
     }
+    case InteractionType.MessageComponent:
+    {
+      const role = message.data.custom_id.split("_");
+      if (role[0] === "role") {
+        const guildId = message.guild_id;
+        const userId = message.member.user.id;
+        const roleId = role[1];
+        if (message.member.roles.find((r) => r === roleId)) {
+          const response = await axiod(
+            `https://discord.com/api/v10/guilds/${guildId}/members/${userId}/roles/${roleId}`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bot ${Deno.env.get("TOKEN")}`,
+                "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)"
+              },
+            }).catch(console.error);
+          if (response.status === 204) {
+            return ctx.response.body = SendReply("Role odstraněna!", true);
+          } else {
+            return ctx.response.body = SendReply("Nastala chyba!", true);
+          }
+        } else {
+          const response = await axiod(
+            `https://discord.com/api/v10/guilds/${guildId}/members/${userId}/roles/${roleId}`,
+            {
+              method: "PUT",
+              headers: {
+                Authorization: `Bot ${Deno.env.get("TOKEN")}`,
+                "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)"
+              },
+            }).catch(console.error);
+          if (response.status === 204) {
+            return ctx.response.body = SendReply("Role přidána!", true);
+          } else {
+            return ctx.response.body = SendReply("Nastala chyba!", true);
+          }
+        }
+      }
+    }
   }
 });
 
