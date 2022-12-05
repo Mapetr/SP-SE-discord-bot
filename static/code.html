@@ -14,6 +14,7 @@
             margin: 6em auto;
         }
     </style>
+    <script src="https://browser.sentry-cdn.com/7.23.0/bundle.tracing.min.js" integrity="sha384-SLecuM36xJH2NzNgjBKu5fDtb6NdPvpx7rjBYlUq2HlKcEqblisdxBl8cuy7uiB1" crossorigin="anonymous"></script>
     <script src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 	    const msalConfig = {
@@ -36,7 +37,7 @@
 				    f(response);
 			    }
 		    }).catch((error) => {
-                console.log(error);
+			    Sentry.captureException(error);
 	        });
     </script>
     <script type="text/javascript">
@@ -57,7 +58,7 @@
                         r(res.accessToken);
                     })
                     .catch((err) => {
-                        console.log(err);
+	                    Sentry.captureException(err);
                     });
                 }
             });
@@ -87,12 +88,19 @@
                         document.body.innerHTML = `<div class="done">Něco se pokazilo. Zkus to znovu později.</div>`;
                     }
                 }).catch((err) => {
-                    console.log(err);
+                    Sentry.captureException(err);
                 });
 	        }).catch((error) => {
-		        console.log(error);
+                Sentry.captureException(error);
 	        });
         }
+    </script>
+    <script type="text/javascript">
+	    Sentry.init({
+            dsn: "https://5022add87ed8407293d699867fbf95d0@o912618.ingest.sentry.io/6755108",
+		    integrations: [new Sentry.BrowserTracing()],
+		    tracesSampleRate: 1.0,
+	    });
     </script>
     <script type="text/javascript">
         function a(txt) {
