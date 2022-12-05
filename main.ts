@@ -7,8 +7,9 @@ import {
 import * as oak from "https://deno.land/x/oak@v11.1.0/mod.ts";
 import axiod from "https://deno.land/x/axiod@0.26.2/mod.ts";
 import { commands, Command } from "./commands/mod.ts";
-import { SendReply, verifyKey } from "./util/mod.ts";
+import { SendReply, verifyKey, Send } from "./util/mod.ts";
 import {Client, Databases} from "https://deno.land/x/appwrite/mod.ts";
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
 
 const router = new oak.Router();
 
@@ -18,6 +19,7 @@ const client = new Client()
   .setKey(Deno.env.get("APPWRITE_API_KEY") || "");
 
 const database = new Databases(client);
+const databaseId = Deno.env.get("APPWRITE_DATABASE_ID") || "";
 
 router.post("/", async (ctx) => {
   const message = await ctx.request.body({ type: "json" }).value;
@@ -52,7 +54,6 @@ router.post("/", async (ctx) => {
 
 router.get("/auth/:code", async (ctx) => {
   const code = ctx.params.code;
-  const databaseId = Deno.env.get("APPWRITE_DATABASE_ID") || "";
   const collectionId = Deno.env.get("APPWRITE_AUTH_ID") || "";
   const data = await database.getDocument(databaseId, collectionId, code);
   if (!data) {
@@ -64,6 +65,81 @@ router.get("/auth/:code", async (ctx) => {
     return;
   }
   await oak.send(ctx, "./static/code.html");
+});
+
+router.put("/auth/resp/:code", async (ctx) => {
+  const code = ctx.params.code;
+  const message = await ctx.request.body({ type: "json" }).value;
+  const collectionId = Deno.env.get("APPWRITE_AUTH_ID") || "";
+  const data = await database.getDocument(databaseId, collectionId, code).catch((err) => {
+    console.error(err);
+  });
+  console.log(data);
+  if (!data) {
+    return ctx.response.body = "Invalid code.";
+  }
+  if (data.expires < Date.now()) {
+    database.deleteDocument(databaseId, collectionId, code);
+    ctx.response.body = "Code expired.";
+    return;
+  }
+  const userId = data.userId;
+  const guildId = data.guildId;
+  const role = await axiod(`https://discord.com/api/v10/guilds/${guildId}/roles`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bot ${Deno.env.get("TOKEN")}`,
+      "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)"
+    }
+  }).catch((err) => {
+    console.error(err);
+  });
+  let specRole = role.data.find((role: any) => role.name === message.department);
+  specRole = specRole.id;
+  if (!specRole) {
+    await axiod(`https://discord.com/api/v10/guilds/${guildId}/roles`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bot ${Deno.env.get("TOKEN")}`,
+        "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)"
+      },
+      data: {
+        name: message.department,
+        mentionable: true,
+      }
+    }).then((res) => {
+      specRole = res.data.id;
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+  let name = message.name.split(" ");
+  name.pop();
+  name = name.join(" ");
+  await axiod(`https://discord.com/api/v10/guilds/${guildId}/members/${userId}`, {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bot ${Deno.env.get("TOKEN")}`,
+      "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)"
+    },
+    data: {
+      nick: name,
+    },
+  }).then((res) => {
+    console.log(res);
+  }).catch((err) => {
+    console.error(err);
+  });
+  await axiod(`https://discord.com/api/v10/guilds/${guildId}/members/${userId}/roles/${specRole}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bot ${Deno.env.get("TOKEN")}`,
+      "User-Agent": "DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)",
+    }
+  }).catch((err) => {
+    console.error(err);
+  });
 });
 
 router.get("/", async (ctx) => {
@@ -90,7 +166,13 @@ router.get("/", async (ctx) => {
   return;
 });
 
-const app = new oak.Application();//{ serverConstructor: oak.FlashServer });
+const app = new oak.Application();
+
+app.use(
+  oakCors({
+    origin: "*"
+  }),
+);
 
 app.use(async (context, next) => {
   try {

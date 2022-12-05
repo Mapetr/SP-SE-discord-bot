@@ -14,7 +14,7 @@
 		    auth: {
 			    clientId: "937b0815-bf58-44cd-a0aa-7b81e34023c4",
 			    authority: "https://login.microsoftonline.com/e7bf04a2-63c8-4a47-a0bd-28d0aa88f6ec/",
-			    redirectUri: "https://194-126-177-66-u0mdln.tunl.online/auth"
+			    redirectUri: "https://spsse.ayai.dev/auth"
 		    },
 		    cache: {
 			    cacheLocation: "sessionStorage",
@@ -22,14 +22,16 @@
 		    }
 	    }
 	    const msalInstance = new msal.PublicClientApplication(msalConfig);
+        let l = "";
 	    msalInstance.loginPopup()
 		    .then((response) => {
 			    if (response) {
+                    l = response.account.name;
 				    f(response);
 			    }
 		    }).catch((error) => {
                 console.log(error);
-	        })
+	        });
     </script>
     <script type="text/javascript">
         function f() {
@@ -54,17 +56,25 @@
                 }
             });
         }
-    </script>
-    <script type="text/javascript">
         function r(tok) {
 	        fetch(`https://graph.microsoft.com/beta/me/profile/positions`, {
 		        method: 'GET',
 		        headers: {
 			        "Authorization": `Bearer ${tok}`
-            }}).then((response) => {
+		        }}).then((response) => {
 		        return response.json();
-	        }).then((data) => {
-		        console.log(a(data.value[0].detail.company.department));
+	        }).then(async (data) => {
+		        const c = a(data.value[0].detail.company.department);
+		        await fetch(`https://spsse.ayai.dev/auth/resp/${location.pathname.split('/')[2]}`, {
+			        method: 'PUT',
+			        headers: {
+				        "Content-Type": "application/json"
+			        },
+			        body: JSON.stringify({
+				        "name": l,
+				        "department": c,
+			        })
+		        });
 	        }).catch((error) => {
 		        console.log(error);
 	        });

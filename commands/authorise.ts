@@ -1,6 +1,6 @@
 import { Command } from './mod.ts';
 import { SendReply } from '../util/mod.ts';
-import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
+import { Client, Databases } from "https://deno.land/x/appwrite/mod.ts";
 
 const client = new Client()
   .setEndpoint(Deno.env.get("APPWRITE_ENDPOINT") || "")
@@ -9,21 +9,23 @@ const client = new Client()
 
 const database = new Databases(client);
 
-export const authorize: Command = {
-  name: 'authorize',
+export const authorise: Command = {
+  name: 'authorise',
   description: 'Authorize yourself!',
   execute: async (interaction) => {
     const databaseId = Deno.env.get("APPWRITE_DATABASE_ID") || "";
     const collectionId = Deno.env.get("APPWRITE_AUTH_ID") || "";
     const code = CreateCode(8);
+    console.log(interaction);
     database.createDocument(databaseId, collectionId, code, {
       "userId": interaction.member.user.id,
+      "guildId": interaction.guild_id,
       "expires": Date.now() + 60000000, // TODO: Change in production
     }).catch((err) => {
       console.log(err);
       return Promise.resolve(SendReply("An error occurred.", true));
     });
-    return Promise.resolve(SendReply(`Link at https://194-126-177-66-u0mdln.tunl.online/auth/${code}`, true));
+    return Promise.resolve(SendReply(`Link at https://spsse.ayai.dev/auth/${code}`, true));
   }
 }
 
