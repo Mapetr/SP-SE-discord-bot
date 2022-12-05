@@ -11,7 +11,7 @@ const database = new Databases(client);
 
 export const authorise: Command = {
   name: 'authorise',
-  description: 'Authorize yourself!',
+  description: 'Authorizse yourself!',
   execute: async (interaction) => {
     const databaseId = Deno.env.get("APPWRITE_DATABASE_ID") || "";
     const collectionId = Deno.env.get("APPWRITE_AUTH_ID") || "";
@@ -20,7 +20,7 @@ export const authorise: Command = {
     database.createDocument(databaseId, collectionId, code, {
       "userId": interaction.member.user.id,
       "guildId": interaction.guild_id,
-      "expires": Date.now() + 60000000, // TODO: Change in production
+      "expires": Date.now() + 600000, // 10 minutes
     }).catch((err) => {
       console.log(err);
       return Promise.resolve(SendReply("An error occurred.", true));

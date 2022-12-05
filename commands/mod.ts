@@ -5,9 +5,10 @@ import {
 // Commands
 import { ping } from './ping.ts';
 import { authorise } from './authorise.ts';
+import { refresh } from './refresh.ts';
 
 export type Command = APIApplicationCommand & {
   execute: (interaction: APIInteraction) => Promise<APIInteractionResponse>;
 }
 
-export const commands: Array<Command> = [ping, authorise];
+export const commands: Array<Command> = [ping, authorise, refresh];

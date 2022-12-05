@@ -140,6 +140,9 @@ router.put("/auth/resp/:code", async (ctx) => {
   }).catch((err) => {
     console.error(err);
   });
+  database.deleteDocument(databaseId, collectionId, code);
+  ctx.response.body = "Success!";
+  return ctx.response.status = 200;
 });
 
 router.get("/", async (ctx) => {
