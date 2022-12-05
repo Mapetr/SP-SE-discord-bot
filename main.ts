@@ -10,8 +10,14 @@ import { commands, Command } from "./commands/mod.ts";
 import { SendReply, verifyKey, Send } from "./util/mod.ts";
 import {Client, Databases} from "https://deno.land/x/appwrite/mod.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
+// import * as Sentry from "npm:@sentry/node@7.23.0";
 
 const router = new oak.Router();
+
+// Sentry.init({
+//   dsn: "https://5022add87ed8407293d699867fbf95d0@o912618.ingest.sentry.io/6755108",
+//   tracesSampleRate: 1.0,
+// });
 
 const client = new Client()
   .setEndpoint(Deno.env.get("APPWRITE_ENDPOINT") || "")
@@ -157,29 +163,29 @@ router.put("/auth/resp/:code", async (ctx) => {
   return ctx.response.status = 200;
 });
 
-router.get("/", async (ctx) => {
-  const token = Deno.env.get("TOKEN");
-  const applicationId = Deno.env.get('APPLICATION_ID');
-  if (!token || !applicationId) {
-    throw new Error('Missing token or applicationId');
-  }
-  let commandsFinal: Partial<Command> = commands;
-  commandsFinal.forEach((command) => {
-    delete command.execute;
-  });
-  console.log(JSON.stringify(commandsFinal));
-  axiod({
-    method: "PUT",
-    url: `https://discord.com/api/v10/applications/${applicationId}/commands`,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bot ${token}`,
-      'User-Agent': 'DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)',
-    },
-    data: JSON.stringify(commandsFinal),
-  })
-  return;
-});
+// router.get("/", async (ctx) => {
+//   const token = Deno.env.get("TOKEN");
+//   const applicationId = Deno.env.get('APPLICATION_ID');
+//   if (!token || !applicationId) {
+//     throw new Error('Missing token or applicationId');
+//   }
+//   let commandsFinal: Partial<Command> = commands;
+//   commandsFinal.forEach((command) => {
+//     delete command.execute;
+//   });
+//   console.log(JSON.stringify(commandsFinal));
+//   axiod({
+//     method: "PUT",
+//     url: `https://discord.com/api/v10/applications/${applicationId}/commands`,
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': `Bot ${token}`,
+//       'User-Agent': 'DiscordBot (https://github.com/Mapetr/SPSSE-discord-bot, 0.3.0)',
+//     },
+//     data: JSON.stringify(commandsFinal),
+//   })
+//   return;
+// });
 
 const app = new oak.Application();
 
